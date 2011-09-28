@@ -1,5 +1,7 @@
 @header@
 
+package com.codahale.trove.mutable
+
 import scala.collection.mutable.{Builder, Buffer}
 import gnu.trove.list.array.T@type@ArrayList
 import scala.collection.{TraversableOnce, Traversable}

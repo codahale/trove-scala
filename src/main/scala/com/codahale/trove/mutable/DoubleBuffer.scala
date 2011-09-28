@@ -1,5 +1,7 @@
 // AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
 
+package com.codahale.trove.mutable
+
 import scala.collection.mutable.{Builder, Buffer}
 import gnu.trove.list.array.TDoubleArrayList
 import scala.collection.{TraversableOnce, Traversable}
