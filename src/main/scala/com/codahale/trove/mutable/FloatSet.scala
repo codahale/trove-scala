@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.TFloatSet
 import gnu.trove.set.hash.TFloatHashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.FloatIterator
 import com.codahale.trove.generic.FloatSetFactory
 
-class FloatSet(private val underlying: TFloatSet)
+class FloatSet(private val underlying: TFloatHashSet)
   extends scala.collection.mutable.Set[Float]
           with com.codahale.trove.collection.FloatSet
           with com.codahale.trove.collection.FloatSetLike[FloatSet]
@@ -42,6 +41,10 @@ class FloatSet(private val underlying: TFloatSet)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: Float) = underlying.contains(elem)

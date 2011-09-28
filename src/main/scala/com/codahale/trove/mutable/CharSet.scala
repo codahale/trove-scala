@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.TCharSet
 import gnu.trove.set.hash.TCharHashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.CharIterator
 import com.codahale.trove.generic.CharSetFactory
 
-class CharSet(private val underlying: TCharSet)
+class CharSet(private val underlying: TCharHashSet)
   extends scala.collection.mutable.Set[Char]
           with com.codahale.trove.collection.CharSet
           with com.codahale.trove.collection.CharSetLike[CharSet]
@@ -42,6 +41,10 @@ class CharSet(private val underlying: TCharSet)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: Char) = underlying.contains(elem)

@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.TLongSet
 import gnu.trove.set.hash.TLongHashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.LongIterator
 import com.codahale.trove.generic.LongSetFactory
 
-class LongSet(private val underlying: TLongSet)
+class LongSet(private val underlying: TLongHashSet)
   extends scala.collection.mutable.Set[Long]
           with com.codahale.trove.collection.LongSet
           with com.codahale.trove.collection.LongSetLike[LongSet]
@@ -42,6 +41,10 @@ class LongSet(private val underlying: TLongSet)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: Long) = underlying.contains(elem)

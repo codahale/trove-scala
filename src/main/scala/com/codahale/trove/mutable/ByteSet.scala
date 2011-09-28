@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.TByteSet
 import gnu.trove.set.hash.TByteHashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.ByteIterator
 import com.codahale.trove.generic.ByteSetFactory
 
-class ByteSet(private val underlying: TByteSet)
+class ByteSet(private val underlying: TByteHashSet)
   extends scala.collection.mutable.Set[Byte]
           with com.codahale.trove.collection.ByteSet
           with com.codahale.trove.collection.ByteSetLike[ByteSet]
@@ -42,6 +41,10 @@ class ByteSet(private val underlying: TByteSet)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: Byte) = underlying.contains(elem)

@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.TIntSet
 import gnu.trove.set.hash.TIntHashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.IntIterator
 import com.codahale.trove.generic.IntSetFactory
 
-class IntSet(private val underlying: TIntSet)
+class IntSet(private val underlying: TIntHashSet)
   extends scala.collection.mutable.Set[Int]
           with com.codahale.trove.collection.IntSet
           with com.codahale.trove.collection.IntSetLike[IntSet]
@@ -42,6 +41,10 @@ class IntSet(private val underlying: TIntSet)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: Int) = underlying.contains(elem)

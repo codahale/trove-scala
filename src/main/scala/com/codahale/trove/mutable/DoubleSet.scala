@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.TDoubleSet
 import gnu.trove.set.hash.TDoubleHashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.DoubleIterator
 import com.codahale.trove.generic.DoubleSetFactory
 
-class DoubleSet(private val underlying: TDoubleSet)
+class DoubleSet(private val underlying: TDoubleHashSet)
   extends scala.collection.mutable.Set[Double]
           with com.codahale.trove.collection.DoubleSet
           with com.codahale.trove.collection.DoubleSetLike[DoubleSet]
@@ -42,6 +41,10 @@ class DoubleSet(private val underlying: TDoubleSet)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: Double) = underlying.contains(elem)

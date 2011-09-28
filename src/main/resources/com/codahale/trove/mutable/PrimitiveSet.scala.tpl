@@ -2,14 +2,13 @@
 
 package com.codahale.trove.mutable
 
-import gnu.trove.set.T@type@Set
 import gnu.trove.set.hash.T@type@HashSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.@type@Iterator
 import com.codahale.trove.generic.@type@SetFactory
 
-class @type@Set(private val underlying: T@type@Set)
+class @type@Set(private val underlying: T@type@HashSet)
   extends scala.collection.mutable.Set[@type@]
           with com.codahale.trove.collection.@type@Set
           with com.codahale.trove.collection.@type@SetLike[@type@Set]
@@ -42,6 +41,10 @@ class @type@Set(private val underlying: T@type@Set)
       case other => super.++=(other)
     }
     this
+  }
+
+  override def sizeHint(size: Int) {
+    underlying.ensureCapacity(size)
   }
 
   def contains(elem: @type@) = underlying.contains(elem)
