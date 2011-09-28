@@ -10,7 +10,7 @@ trait ByteSetFactory[Coll <: ByteSet with ByteSetLike[Coll]] {
   def empty: Coll
   def newBuilder: Builder[Byte, Coll]
   def apply(elems: Byte*): Coll = (empty /: elems)(_ + _)
-  def primitiveBytesetCanBuildFrom = new CanBuildFrom[Coll, Byte, Coll] {
+  def primitiveByteSetCanBuildFrom = new CanBuildFrom[Coll, Byte, Coll] {
     def apply(from: Coll) = newBuilder
     def apply() = newBuilder
   }

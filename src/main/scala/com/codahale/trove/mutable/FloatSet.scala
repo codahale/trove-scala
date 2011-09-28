@@ -55,5 +55,5 @@ class FloatSet(private val underlying: TFloatSet)
 object FloatSet extends FloatSetFactory[FloatSet] {
   def empty: FloatSet = new FloatSet(new TFloatHashSet())
   def newBuilder: Builder[Float, FloatSet] = new GrowingBuilder[Float, FloatSet](empty)
-  implicit def canBuildFrom: CanBuildFrom[FloatSet, Float, FloatSet] = primitiveFloatsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[FloatSet, Float, FloatSet] = primitiveFloatSetCanBuildFrom
 }

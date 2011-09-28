@@ -55,5 +55,5 @@ class @type@Set(private val underlying: T@type@Set)
 object @type@Set extends @type@SetFactory[@type@Set] {
   def empty: @type@Set = new @type@Set(new T@type@HashSet())
   def newBuilder: Builder[@type@, @type@Set] = new GrowingBuilder[@type@, @type@Set](empty)
-  implicit def canBuildFrom: CanBuildFrom[@type@Set, @type@, @type@Set] = primitive@type@setCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[@type@Set, @type@, @type@Set] = primitive@type@SetCanBuildFrom
 }

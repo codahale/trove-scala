@@ -15,5 +15,5 @@ object CharSet extends CharSetFactory[CharSet] {
 
   def newBuilder = immutable.CharSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[CharSet, Char, CharSet] = primitiveCharsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[CharSet, Char, CharSet] = primitiveCharSetCanBuildFrom
 }

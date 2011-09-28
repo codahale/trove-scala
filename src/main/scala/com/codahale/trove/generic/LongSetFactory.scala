@@ -10,7 +10,7 @@ trait LongSetFactory[Coll <: LongSet with LongSetLike[Coll]] {
   def empty: Coll
   def newBuilder: Builder[Long, Coll]
   def apply(elems: Long*): Coll = (empty /: elems)(_ + _)
-  def primitiveLongsetCanBuildFrom = new CanBuildFrom[Coll, Long, Coll] {
+  def primitiveLongSetCanBuildFrom = new CanBuildFrom[Coll, Long, Coll] {
     def apply(from: Coll) = newBuilder
     def apply() = newBuilder
   }

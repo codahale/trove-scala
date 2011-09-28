@@ -15,5 +15,5 @@ object DoubleSet extends DoubleSetFactory[DoubleSet] {
 
   def newBuilder = immutable.DoubleSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[DoubleSet, Double, DoubleSet] = primitiveDoublesetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[DoubleSet, Double, DoubleSet] = primitiveDoubleSetCanBuildFrom
 }

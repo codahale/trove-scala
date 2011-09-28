@@ -15,5 +15,5 @@ object FloatSet extends FloatSetFactory[FloatSet] {
 
   def newBuilder = immutable.FloatSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[FloatSet, Float, FloatSet] = primitiveFloatsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[FloatSet, Float, FloatSet] = primitiveFloatSetCanBuildFrom
 }

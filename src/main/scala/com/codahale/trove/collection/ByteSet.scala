@@ -15,5 +15,5 @@ object ByteSet extends ByteSetFactory[ByteSet] {
 
   def newBuilder = immutable.ByteSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[ByteSet, Byte, ByteSet] = primitiveBytesetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[ByteSet, Byte, ByteSet] = primitiveByteSetCanBuildFrom
 }

@@ -55,5 +55,5 @@ class ByteSet(private val underlying: TByteSet)
 object ByteSet extends ByteSetFactory[ByteSet] {
   def empty: ByteSet = new ByteSet(new TByteHashSet())
   def newBuilder: Builder[Byte, ByteSet] = new GrowingBuilder[Byte, ByteSet](empty)
-  implicit def canBuildFrom: CanBuildFrom[ByteSet, Byte, ByteSet] = primitiveBytesetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[ByteSet, Byte, ByteSet] = primitiveByteSetCanBuildFrom
 }

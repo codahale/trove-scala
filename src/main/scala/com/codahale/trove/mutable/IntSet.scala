@@ -55,5 +55,5 @@ class IntSet(private val underlying: TIntSet)
 object IntSet extends IntSetFactory[IntSet] {
   def empty: IntSet = new IntSet(new TIntHashSet())
   def newBuilder: Builder[Int, IntSet] = new GrowingBuilder[Int, IntSet](empty)
-  implicit def canBuildFrom: CanBuildFrom[IntSet, Int, IntSet] = primitiveIntsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[IntSet, Int, IntSet] = primitiveIntSetCanBuildFrom
 }

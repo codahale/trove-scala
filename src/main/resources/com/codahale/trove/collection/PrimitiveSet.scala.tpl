@@ -15,5 +15,5 @@ object @type@Set extends @type@SetFactory[@type@Set] {
 
   def newBuilder = immutable.@type@Set.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[@type@Set, @type@, @type@Set] = primitive@type@setCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[@type@Set, @type@, @type@Set] = primitive@type@SetCanBuildFrom
 }

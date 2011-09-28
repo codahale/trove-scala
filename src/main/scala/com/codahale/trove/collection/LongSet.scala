@@ -15,5 +15,5 @@ object LongSet extends LongSetFactory[LongSet] {
 
   def newBuilder = immutable.LongSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[LongSet, Long, LongSet] = primitiveLongsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[LongSet, Long, LongSet] = primitiveLongSetCanBuildFrom
 }

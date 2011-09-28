@@ -55,5 +55,5 @@ class DoubleSet(private val underlying: TDoubleSet)
 object DoubleSet extends DoubleSetFactory[DoubleSet] {
   def empty: DoubleSet = new DoubleSet(new TDoubleHashSet())
   def newBuilder: Builder[Double, DoubleSet] = new GrowingBuilder[Double, DoubleSet](empty)
-  implicit def canBuildFrom: CanBuildFrom[DoubleSet, Double, DoubleSet] = primitiveDoublesetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[DoubleSet, Double, DoubleSet] = primitiveDoubleSetCanBuildFrom
 }

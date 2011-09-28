@@ -15,5 +15,5 @@ object IntSet extends IntSetFactory[IntSet] {
 
   def newBuilder = immutable.IntSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[IntSet, Int, IntSet] = primitiveIntsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[IntSet, Int, IntSet] = primitiveIntSetCanBuildFrom
 }

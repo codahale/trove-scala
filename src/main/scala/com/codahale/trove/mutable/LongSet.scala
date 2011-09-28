@@ -55,5 +55,5 @@ class LongSet(private val underlying: TLongSet)
 object LongSet extends LongSetFactory[LongSet] {
   def empty: LongSet = new LongSet(new TLongHashSet())
   def newBuilder: Builder[Long, LongSet] = new GrowingBuilder[Long, LongSet](empty)
-  implicit def canBuildFrom: CanBuildFrom[LongSet, Long, LongSet] = primitiveLongsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[LongSet, Long, LongSet] = primitiveLongSetCanBuildFrom
 }

@@ -10,7 +10,7 @@ trait CharSetFactory[Coll <: CharSet with CharSetLike[Coll]] {
   def empty: Coll
   def newBuilder: Builder[Char, Coll]
   def apply(elems: Char*): Coll = (empty /: elems)(_ + _)
-  def primitiveCharsetCanBuildFrom = new CanBuildFrom[Coll, Char, Coll] {
+  def primitiveCharSetCanBuildFrom = new CanBuildFrom[Coll, Char, Coll] {
     def apply(from: Coll) = newBuilder
     def apply() = newBuilder
   }

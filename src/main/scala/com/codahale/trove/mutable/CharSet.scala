@@ -55,5 +55,5 @@ class CharSet(private val underlying: TCharSet)
 object CharSet extends CharSetFactory[CharSet] {
   def empty: CharSet = new CharSet(new TCharHashSet())
   def newBuilder: Builder[Char, CharSet] = new GrowingBuilder[Char, CharSet](empty)
-  implicit def canBuildFrom: CanBuildFrom[CharSet, Char, CharSet] = primitiveCharsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[CharSet, Char, CharSet] = primitiveCharSetCanBuildFrom
 }
