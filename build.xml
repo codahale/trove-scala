@@ -70,12 +70,33 @@
         </parallel>
     </target>
 
-    <target name="generate-sources" depends="render-iterators,render-sets" />
+    <macrodef name="render-seq">
+        <attribute name="type"/>
+        <sequential>
+            <render src="com/codahale/trove/mutable/PrimitiveBuffer.scala.tpl"
+                    dst="com/codahale/trove/mutable/@{type}Buffer.scala"
+                    type="@{type}"/>
+        </sequential>
+    </macrodef>
+
+    <target name="render-seqs">
+        <parallel>
+            <render-seq type="Byte"/>
+            <render-seq type="Char"/>
+            <render-seq type="Double"/>
+            <render-seq type="Float"/>
+            <render-seq type="Int"/>
+            <render-seq type="Long"/>
+        </parallel>
+    </target>
+
+    <target name="generate-sources" depends="render-iterators,render-sets,render-seqs" />
 
     <target name="clean">
         <delete>
             <fileset dir="src/main/scala" includes="**/*Iterator.scala"/>
             <fileset dir="src/main/scala" includes="**/*Set*.scala"/>
+            <fileset dir="src/main/scala" includes="**/*Buffer*.scala"/>
         </delete>
     </target>
 </project>
