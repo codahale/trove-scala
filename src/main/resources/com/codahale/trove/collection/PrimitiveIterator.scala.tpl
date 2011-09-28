@@ -1,4 +1,6 @@
-package com.codahale.trove.generic
+@header@
+
+package com.codahale.trove.collection
 
 import gnu.trove.iterator.T@type@Iterator
 

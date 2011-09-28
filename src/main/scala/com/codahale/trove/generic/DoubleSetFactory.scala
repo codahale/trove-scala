@@ -1,3 +1,5 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.generic
 
 import com.codahale.trove.collection.{DoubleSetLike, DoubleSet}
@@ -8,7 +10,7 @@ trait DoubleSetFactory[Coll <: DoubleSet with DoubleSetLike[Coll]] {
   def empty: Coll
   def newBuilder: Builder[Double, Coll]
   def apply(elems: Double*): Coll = (empty /: elems)(_ + _)
-  def doublesetCanBuildFrom = new CanBuildFrom[Coll, Double, Coll] {
+  def primitiveDoublesetCanBuildFrom = new CanBuildFrom[Coll, Double, Coll] {
     def apply(from: Coll) = newBuilder
     def apply() = newBuilder
   }

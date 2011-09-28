@@ -1,3 +1,5 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.collection
 
 import scala.collection.generic.{CanBuildFrom}
@@ -13,5 +15,5 @@ object LongSet extends LongSetFactory[LongSet] {
 
   def newBuilder = immutable.LongSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[LongSet, Long, LongSet] = longsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[LongSet, Long, LongSet] = primitiveLongsetCanBuildFrom
 }

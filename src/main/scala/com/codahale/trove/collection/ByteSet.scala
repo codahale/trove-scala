@@ -1,3 +1,5 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.collection
 
 import scala.collection.generic.{CanBuildFrom}
@@ -13,5 +15,5 @@ object ByteSet extends ByteSetFactory[ByteSet] {
 
   def newBuilder = immutable.ByteSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[ByteSet, Byte, ByteSet] = bytesetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[ByteSet, Byte, ByteSet] = primitiveBytesetCanBuildFrom
 }

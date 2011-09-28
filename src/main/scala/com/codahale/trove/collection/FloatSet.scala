@@ -1,3 +1,5 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.collection
 
 import scala.collection.generic.{CanBuildFrom}
@@ -13,5 +15,5 @@ object FloatSet extends FloatSetFactory[FloatSet] {
 
   def newBuilder = immutable.FloatSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[FloatSet, Float, FloatSet] = floatsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[FloatSet, Float, FloatSet] = primitiveFloatsetCanBuildFrom
 }

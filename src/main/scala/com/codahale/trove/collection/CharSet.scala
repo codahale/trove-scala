@@ -1,3 +1,5 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.collection
 
 import scala.collection.generic.{CanBuildFrom}
@@ -13,5 +15,5 @@ object CharSet extends CharSetFactory[CharSet] {
 
   def newBuilder = immutable.CharSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[CharSet, Char, CharSet] = charsetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[CharSet, Char, CharSet] = primitiveCharsetCanBuildFrom
 }

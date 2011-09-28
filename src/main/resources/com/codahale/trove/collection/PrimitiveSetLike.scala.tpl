@@ -1,3 +1,5 @@
+@header@
+
 package com.codahale.trove.collection
 
 import scala.collection.{SetLike, Set}

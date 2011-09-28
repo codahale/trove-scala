@@ -1,20 +1,41 @@
+@header@
+
 package com.codahale.trove.immutable
 
 import com.codahale.trove.collection
-import com.codahale.trove.generic.{@type@SetFactory, @type@Iterator}
+import com.codahale.trove.generic.@type@SetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiable@type@Set
 import scala.collection.mutable.{SetBuilder, Builder}
 import gnu.trove.set.hash.T@type@HashSet
 
-class @type@Set(val underlying: TUnmodifiable@type@Set) extends scala.collection.immutable.Set[@type@]
-                      with collection.@type@Set
-                      with collection.@type@SetLike[@type@Set]
-                      with Serializable {
+class @type@Set(private val underlying: TUnmodifiable@type@Set)
+  extends scala.collection.immutable.Set[@type@]
+          with collection.@type@Set
+          with collection.@type@SetLike[@type@Set]
+          with Serializable {
   override def empty: @type@Set = @type@Set.empty
+
+  override def ++(xs: TraversableOnce[@type@]) = {
+    val newSet = new T@type@HashSet(underlying)
+    xs match {
+      case s: @type@Set => newSet.addAll(s.underlying)
+      case other => other.foreach(newSet.add)
+    }
+    new @type@Set(new TUnmodifiable@type@Set(newSet))
+  }
 
   def +(elem: @type@): @type@Set = {
     val newSet = new T@type@HashSet(underlying)
     newSet.add(elem)
+    new @type@Set(new TUnmodifiable@type@Set(newSet))
+  }
+
+  override def --(xs: TraversableOnce[@type@]) = {
+    val newSet = new T@type@HashSet(underlying)
+    xs match {
+      case s: @type@Set => newSet.removeAll(s.underlying)
+      case other => other.foreach(newSet.remove)
+    }
     new @type@Set(new TUnmodifiable@type@Set(newSet))
   }
 
@@ -26,7 +47,9 @@ class @type@Set(val underlying: TUnmodifiable@type@Set) extends scala.collection
 
   def contains(elem: @type@): Boolean = underlying.contains(elem)
 
-  def iterator = new @type@Iterator(underlying.iterator)
+  def iterator = new collection.@type@Iterator(underlying.iterator)
+
+  override def size = underlying.size
 }
 
 object @type@Set extends @type@SetFactory[@type@Set] {

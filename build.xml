@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<project name="trove-scala">
+    <macrodef name="render">
+        <attribute name="src"/>
+        <attribute name="type"/>
+        <attribute name="dst"/>
+        <attribute name="dir" default="main"/>
+        <element name="render" optional="yes"/>
+        <sequential>
+            <copy file="src/main/resources/@{src}" tofile="src/@{dir}/scala/@{dst}">
+                <filterchain>
+                    <replacetokens>
+                        <token key="type" value="@{type}"/>
+                        <token key="header" value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="render-iterator">
+        <attribute name="type"/>
+        <sequential>
+            <render src="com/codahale/trove/collection/PrimitiveIterator.scala.tpl"
+                    dst="com/codahale/trove/collection/@{type}Iterator.scala"
+                    type="@{type}"/>
+        </sequential>
+    </macrodef>
+
+    <target name="render-iterators">
+        <parallel>
+            <render-iterator type="Byte"/>
+            <render-iterator type="Char"/>
+            <render-iterator type="Double"/>
+            <render-iterator type="Float"/>
+            <render-iterator type="Int"/>
+            <render-iterator type="Long"/>
+        </parallel>
+    </target>
+
+    <macrodef name="render-set">
+        <attribute name="type"/>
+        <sequential>
+            <render src="com/codahale/trove/collection/PrimitiveSet.scala.tpl"
+                    dst="com/codahale/trove/collection/@{type}Set.scala"
+                    type="@{type}"/>
+            <render src="com/codahale/trove/collection/PrimitiveSetLike.scala.tpl"
+                    dst="com/codahale/trove/collection/@{type}SetLike.scala"
+                    type="@{type}"/>
+            <render src="com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl"
+                    dst="com/codahale/trove/generic/@{type}SetFactory.scala"
+                    type="@{type}"/>
+            <render src="com/codahale/trove/immutable/PrimitiveSet.scala.tpl"
+                    dst="com/codahale/trove/immutable/@{type}Set.scala"
+                    type="@{type}"/>
+            <render src="com/codahale/trove/mutable/PrimitiveSet.scala.tpl"
+                    dst="com/codahale/trove/mutable/@{type}Set.scala"
+                    type="@{type}"/>
+        </sequential>
+    </macrodef>
+
+    <target name="render-sets">
+        <parallel>
+            <render-set type="Byte"/>
+            <render-set type="Char"/>
+            <render-set type="Double"/>
+            <render-set type="Float"/>
+            <render-set type="Int"/>
+            <render-set type="Long"/>
+        </parallel>
+    </target>
+
+    <target name="generate-sources" depends="render-iterators,render-sets" />
+
+    <target name="clean">
+        <delete>
+            <fileset dir="src/main/scala" includes="**/*Iterator.scala"/>
+            <fileset dir="src/main/scala" includes="**/*Set*.scala"/>
+        </delete>
+    </target>
+</project>

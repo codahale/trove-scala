@@ -1,3 +1,5 @@
+@header@
+
 package com.codahale.trove.collection
 
 import scala.collection.generic.{CanBuildFrom}
@@ -13,5 +15,5 @@ object @type@Set extends @type@SetFactory[@type@Set] {
 
   def newBuilder = immutable.@type@Set.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[@type@Set, @type@, @type@Set] = @lowercaseType@setCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[@type@Set, @type@, @type@Set] = primitive@type@setCanBuildFrom
 }

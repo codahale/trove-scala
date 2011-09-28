@@ -1,20 +1,41 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.immutable
 
 import com.codahale.trove.collection
-import com.codahale.trove.generic.{IntSetFactory, IntIterator}
+import com.codahale.trove.generic.IntSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableIntSet
 import scala.collection.mutable.{SetBuilder, Builder}
 import gnu.trove.set.hash.TIntHashSet
 
-class IntSet(val underlying: TUnmodifiableIntSet) extends scala.collection.immutable.Set[Int]
-                      with collection.IntSet
-                      with collection.IntSetLike[IntSet]
-                      with Serializable {
+class IntSet(private val underlying: TUnmodifiableIntSet)
+  extends scala.collection.immutable.Set[Int]
+          with collection.IntSet
+          with collection.IntSetLike[IntSet]
+          with Serializable {
   override def empty: IntSet = IntSet.empty
+
+  override def ++(xs: TraversableOnce[Int]) = {
+    val newSet = new TIntHashSet(underlying)
+    xs match {
+      case s: IntSet => newSet.addAll(s.underlying)
+      case other => other.foreach(newSet.add)
+    }
+    new IntSet(new TUnmodifiableIntSet(newSet))
+  }
 
   def +(elem: Int): IntSet = {
     val newSet = new TIntHashSet(underlying)
     newSet.add(elem)
+    new IntSet(new TUnmodifiableIntSet(newSet))
+  }
+
+  override def --(xs: TraversableOnce[Int]) = {
+    val newSet = new TIntHashSet(underlying)
+    xs match {
+      case s: IntSet => newSet.removeAll(s.underlying)
+      case other => other.foreach(newSet.remove)
+    }
     new IntSet(new TUnmodifiableIntSet(newSet))
   }
 
@@ -26,7 +47,9 @@ class IntSet(val underlying: TUnmodifiableIntSet) extends scala.collection.immut
 
   def contains(elem: Int): Boolean = underlying.contains(elem)
 
-  def iterator = new IntIterator(underlying.iterator)
+  def iterator = new collection.IntIterator(underlying.iterator)
+
+  override def size = underlying.size
 }
 
 object IntSet extends IntSetFactory[IntSet] {

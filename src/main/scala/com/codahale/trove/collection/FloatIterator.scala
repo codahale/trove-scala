@@ -1,4 +1,6 @@
-package com.codahale.trove.generic
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
+package com.codahale.trove.collection
 
 import gnu.trove.iterator.TFloatIterator
 

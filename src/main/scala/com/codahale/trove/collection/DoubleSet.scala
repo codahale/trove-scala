@@ -1,3 +1,5 @@
+// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!
+
 package com.codahale.trove.collection
 
 import scala.collection.generic.{CanBuildFrom}
@@ -13,5 +15,5 @@ object DoubleSet extends DoubleSetFactory[DoubleSet] {
 
   def newBuilder = immutable.DoubleSet.newBuilder
 
-  implicit def canBuildFrom: CanBuildFrom[DoubleSet, Double, DoubleSet] = doublesetCanBuildFrom
+  implicit def canBuildFrom: CanBuildFrom[DoubleSet, Double, DoubleSet] = primitiveDoublesetCanBuildFrom
 }
