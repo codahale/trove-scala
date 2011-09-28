@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.codahale</groupId>
+    <artifactId>trove-scala_2.9.1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Trove Collections for Scala ${scala.version}</name>
+
+    <properties>
+        <scala.version>2.9.1</scala.version>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>Coda Hale</name>
+            <email>coda.hale@gmail.com</email>
+            <timezone>-8</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <url>http://codahale.com/mit.txt</url>
+            <name>The MIT License</name>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/codahale/trove-scala.git</connection>
+        <developerConnection>scm:git:git@github.com:codahale/trove-scala.git</developerConnection>
+        <url>http://github.com/codahale/trove-scala/</url>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>http://github.com/codahale/trove-scala/issues#issue/</url>
+    </issueManagement>
+
+    <repositories>
+        <repository>
+            <id>scala-tools-releases</id>
+            <url>http://scala-tools.org/repo-releases/</url>
+        </repository>
+        <repository>
+            <id>repo.codahale.com</id>
+            <url>http://repo.codahale.com</url>
+        </repository>
+        <repository>
+            <id>nativelibs4java</id>
+            <url>http://nativelibs4java.sourceforge.net/maven</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>scala-tools-releases</id>
+            <url>http://scala-tools.org/repo-releases/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>scala-tools-snapshots</id>
+            <url>http://scala-tools.org/repo-snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>repo.codahale.com</id>
+            <url>scp://codahale.com/home/codahale/repo.codahale.com</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.trove4j</groupId>
+            <artifactId>trove4j</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale</groupId>
+            <artifactId>simplespec_${scala.version}</artifactId>
+            <version>0.5.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.3-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-optimise</arg>
+                        <arg>-unchecked</arg>
+                        <arg>-deprecation</arg>
+                    </args>
+                    <compilerPlugins>
+                        <compilerPlugin>
+                            <groupId>com.nativelibs4java</groupId>
+                            <artifactId>scalacl-compiler-plugin</artifactId>
+                            <version>0.2</version>
+                        </compilerPlugin>
+                    </compilerPlugins>
+                    <charset>UTF-8</charset>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <argLine>-Xmx1024m</argLine>
+                    <includes>
+                        <include>**/*Spec.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*Test.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target>
+                                <!-- ByteIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/ByteIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Byte"/>
+                                            <token key="lowercaseType" value="byte"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- CharIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/CharIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Char"/>
+                                            <token key="lowercaseType" value="char"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- DoubleIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/DoubleIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Double"/>
+                                            <token key="lowercaseType" value="double"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- FloatIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/FloatIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Float"/>
+                                            <token key="lowercaseType" value="float"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- IntIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/IntIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Int"/>
+                                            <token key="lowercaseType" value="int"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- LongIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/LongIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Long"/>
+                                            <token key="lowercaseType" value="long"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- ShortIterator -->
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveIterator.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/ShortIterator.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Short"/>
+                                            <token key="lowercaseType" value="short"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- ByteSet -->
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/ByteSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Byte"/>
+                                            <token key="lowercaseType" value="byte"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSetLike.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/ByteSetLike.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Byte"/>
+                                            <token key="lowercaseType" value="byte"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/ByteSetFactory.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Byte"/>
+                                            <token key="lowercaseType" value="byte"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/mutable/ByteSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Byte"/>
+                                            <token key="lowercaseType" value="byte"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/immutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/immutable/ByteSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Byte"/>
+                                            <token key="lowercaseType" value="byte"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- CharSet -->
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/CharSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Char"/>
+                                            <token key="lowercaseType" value="char"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSetLike.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/CharSetLike.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Char"/>
+                                            <token key="lowercaseType" value="char"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/CharSetFactory.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Char"/>
+                                            <token key="lowercaseType" value="char"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/mutable/CharSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Char"/>
+                                            <token key="lowercaseType" value="char"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/immutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/immutable/CharSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Char"/>
+                                            <token key="lowercaseType" value="char"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- DoubleSet -->
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/DoubleSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Double"/>
+                                            <token key="lowercaseType" value="double"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSetLike.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/DoubleSetLike.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Double"/>
+                                            <token key="lowercaseType" value="double"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/DoubleSetFactory.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Double"/>
+                                            <token key="lowercaseType" value="double"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/mutable/DoubleSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Double"/>
+                                            <token key="lowercaseType" value="double"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/immutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/immutable/DoubleSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Double"/>
+                                            <token key="lowercaseType" value="double"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- FloatSet -->
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/FloatSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Float"/>
+                                            <token key="lowercaseType" value="float"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSetLike.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/FloatSetLike.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Float"/>
+                                            <token key="lowercaseType" value="float"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/FloatSetFactory.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Float"/>
+                                            <token key="lowercaseType" value="float"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/mutable/FloatSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Float"/>
+                                            <token key="lowercaseType" value="float"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/immutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/immutable/FloatSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Float"/>
+                                            <token key="lowercaseType" value="float"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- IntSet -->
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/IntSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Int"/>
+                                            <token key="lowercaseType" value="int"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSetLike.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/IntSetLike.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Int"/>
+                                            <token key="lowercaseType" value="int"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/IntSetFactory.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Int"/>
+                                            <token key="lowercaseType" value="int"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/mutable/IntSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Int"/>
+                                            <token key="lowercaseType" value="int"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/immutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/immutable/IntSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Int"/>
+                                            <token key="lowercaseType" value="int"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+
+                                <!-- LongSet -->
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/LongSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Long"/>
+                                            <token key="lowercaseType" value="long"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveSetLike.scala.tpl" tofile="src/main/scala/com/codahale/trove/collection/LongSetLike.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Long"/>
+                                            <token key="lowercaseType" value="long"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/generic/PrimitiveSetFactory.scala.tpl" tofile="src/main/scala/com/codahale/trove/generic/LongSetFactory.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Long"/>
+                                            <token key="lowercaseType" value="long"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/mutable/LongSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Long"/>
+                                            <token key="lowercaseType" value="long"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                <copy file="src/main/resources/com/codahale/trove/immutable/PrimitiveSet.scala.tpl" tofile="src/main/scala/com/codahale/trove/immutable/LongSet.scala">
+                                    <filterchain>
+                                        <replacetokens>
+                                            <token key="type" value="Long"/>
+                                            <token key="lowercaseType" value="long"/>
+                                        </replacetokens>
+                                    </filterchain>
+                                </copy>
+                                
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>1.0-beta-7</version>
+            </extension>
+        </extensions>
+    </build>
+</project>
