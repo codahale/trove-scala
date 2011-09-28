@@ -1,3 +1,4 @@
-* Tests
-* Seqs
-* Maps
+* tests
+* immutable sequences
+* immutable maps
+* mutable maps
