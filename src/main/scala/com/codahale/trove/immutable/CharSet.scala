@@ -49,6 +49,8 @@ class CharSet(private val underlying: TUnmodifiableCharSet)
 
   def iterator = new collection.CharIterator(underlying.iterator)
 
+  override def toSet[B >: Char] = this.asInstanceOf[scala.collection.immutable.Set[B]]
+
   override def size = underlying.size
 }
 

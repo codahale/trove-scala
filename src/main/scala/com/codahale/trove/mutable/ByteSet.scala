@@ -3,10 +3,12 @@
 package com.codahale.trove.mutable
 
 import gnu.trove.set.hash.TByteHashSet
+import gnu.trove.impl.unmodifiable.TUnmodifiableByteSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.ByteIterator
 import com.codahale.trove.generic.ByteSetFactory
+import com.codahale.trove.immutable.{ByteSet => ImmutableByteSet}
 
 class ByteSet(private val underlying: TByteHashSet)
   extends scala.collection.mutable.Set[Byte]
@@ -50,6 +52,8 @@ class ByteSet(private val underlying: TByteHashSet)
   def contains(elem: Byte) = underlying.contains(elem)
 
   def iterator = new ByteIterator(underlying.iterator)
+
+  override def toSet[B >: Byte] = new ImmutableByteSet(new TUnmodifiableByteSet(underlying)).asInstanceOf[scala.collection.immutable.Set[B]]
 
   override def size = underlying.size
 }

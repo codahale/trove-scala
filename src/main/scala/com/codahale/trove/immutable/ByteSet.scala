@@ -49,6 +49,8 @@ class ByteSet(private val underlying: TUnmodifiableByteSet)
 
   def iterator = new collection.ByteIterator(underlying.iterator)
 
+  override def toSet[B >: Byte] = this.asInstanceOf[scala.collection.immutable.Set[B]]
+
   override def size = underlying.size
 }
 

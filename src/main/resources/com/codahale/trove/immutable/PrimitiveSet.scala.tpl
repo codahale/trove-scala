@@ -49,6 +49,8 @@ class @type@Set(private val underlying: TUnmodifiable@type@Set)
 
   def iterator = new collection.@type@Iterator(underlying.iterator)
 
+  override def toSet[B >: @type@] = this.asInstanceOf[scala.collection.immutable.Set[B]]
+
   override def size = underlying.size
 }
 

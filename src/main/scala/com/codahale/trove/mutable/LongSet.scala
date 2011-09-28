@@ -3,10 +3,12 @@
 package com.codahale.trove.mutable
 
 import gnu.trove.set.hash.TLongHashSet
+import gnu.trove.impl.unmodifiable.TUnmodifiableLongSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.LongIterator
 import com.codahale.trove.generic.LongSetFactory
+import com.codahale.trove.immutable.{LongSet => ImmutableLongSet}
 
 class LongSet(private val underlying: TLongHashSet)
   extends scala.collection.mutable.Set[Long]
@@ -50,6 +52,8 @@ class LongSet(private val underlying: TLongHashSet)
   def contains(elem: Long) = underlying.contains(elem)
 
   def iterator = new LongIterator(underlying.iterator)
+
+  override def toSet[B >: Long] = new ImmutableLongSet(new TUnmodifiableLongSet(underlying)).asInstanceOf[scala.collection.immutable.Set[B]]
 
   override def size = underlying.size
 }

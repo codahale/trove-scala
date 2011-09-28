@@ -3,10 +3,12 @@
 package com.codahale.trove.mutable
 
 import gnu.trove.set.hash.TFloatHashSet
+import gnu.trove.impl.unmodifiable.TUnmodifiableFloatSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.FloatIterator
 import com.codahale.trove.generic.FloatSetFactory
+import com.codahale.trove.immutable.{FloatSet => ImmutableFloatSet}
 
 class FloatSet(private val underlying: TFloatHashSet)
   extends scala.collection.mutable.Set[Float]
@@ -50,6 +52,8 @@ class FloatSet(private val underlying: TFloatHashSet)
   def contains(elem: Float) = underlying.contains(elem)
 
   def iterator = new FloatIterator(underlying.iterator)
+
+  override def toSet[B >: Float] = new ImmutableFloatSet(new TUnmodifiableFloatSet(underlying)).asInstanceOf[scala.collection.immutable.Set[B]]
 
   override def size = underlying.size
 }

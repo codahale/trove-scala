@@ -49,6 +49,8 @@ class LongSet(private val underlying: TUnmodifiableLongSet)
 
   def iterator = new collection.LongIterator(underlying.iterator)
 
+  override def toSet[B >: Long] = this.asInstanceOf[scala.collection.immutable.Set[B]]
+
   override def size = underlying.size
 }
 

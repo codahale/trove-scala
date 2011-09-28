@@ -49,6 +49,8 @@ class DoubleSet(private val underlying: TUnmodifiableDoubleSet)
 
   def iterator = new collection.DoubleIterator(underlying.iterator)
 
+  override def toSet[B >: Double] = this.asInstanceOf[scala.collection.immutable.Set[B]]
+
   override def size = underlying.size
 }
 

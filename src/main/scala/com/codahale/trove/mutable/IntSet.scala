@@ -3,10 +3,12 @@
 package com.codahale.trove.mutable
 
 import gnu.trove.set.hash.TIntHashSet
+import gnu.trove.impl.unmodifiable.TUnmodifiableIntSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.IntIterator
 import com.codahale.trove.generic.IntSetFactory
+import com.codahale.trove.immutable.{IntSet => ImmutableIntSet}
 
 class IntSet(private val underlying: TIntHashSet)
   extends scala.collection.mutable.Set[Int]
@@ -50,6 +52,8 @@ class IntSet(private val underlying: TIntHashSet)
   def contains(elem: Int) = underlying.contains(elem)
 
   def iterator = new IntIterator(underlying.iterator)
+
+  override def toSet[B >: Int] = new ImmutableIntSet(new TUnmodifiableIntSet(underlying)).asInstanceOf[scala.collection.immutable.Set[B]]
 
   override def size = underlying.size
 }

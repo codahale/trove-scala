@@ -3,10 +3,12 @@
 package com.codahale.trove.mutable
 
 import gnu.trove.set.hash.TCharHashSet
+import gnu.trove.impl.unmodifiable.TUnmodifiableCharSet
 import scala.collection.mutable.{GrowingBuilder, Builder}
 import scala.collection.generic.{CanBuildFrom}
 import com.codahale.trove.collection.CharIterator
 import com.codahale.trove.generic.CharSetFactory
+import com.codahale.trove.immutable.{CharSet => ImmutableCharSet}
 
 class CharSet(private val underlying: TCharHashSet)
   extends scala.collection.mutable.Set[Char]
@@ -50,6 +52,8 @@ class CharSet(private val underlying: TCharHashSet)
   def contains(elem: Char) = underlying.contains(elem)
 
   def iterator = new CharIterator(underlying.iterator)
+
+  override def toSet[B >: Char] = new ImmutableCharSet(new TUnmodifiableCharSet(underlying)).asInstanceOf[scala.collection.immutable.Set[B]]
 
   override def size = underlying.size
 }
