@@ -27,6 +27,25 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="render-map-iterator">
+        <attribute name="keyType"/>
+        <attribute name="valueType"/>
+        <sequential>
+            <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveMapIterator.scala.tpl"
+                  tofile="src/main/scala/com/codahale/trove/collection/@{keyType}@{valueType}Iterator.scala">
+                <filterchain>
+                    <replacetokens>
+                        <token key="keyType" value="@{keyType}"/>
+                        <token key="valueType" value="@{valueType}"/>
+                        <token key="header"
+                               value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+
+    </macrodef>
+
     <target name="render-iterators">
         <parallel>
             <render-iterator type="Byte"/>
@@ -35,6 +54,42 @@
             <render-iterator type="Float"/>
             <render-iterator type="Int"/>
             <render-iterator type="Long"/>
+            <render-map-iterator keyType="Byte" valueType="Byte"/>
+            <render-map-iterator keyType="Byte" valueType="Char"/>
+            <render-map-iterator keyType="Byte" valueType="Double"/>
+            <render-map-iterator keyType="Byte" valueType="Float"/>
+            <render-map-iterator keyType="Byte" valueType="Int"/>
+            <render-map-iterator keyType="Byte" valueType="Long"/>
+            <render-map-iterator keyType="Char" valueType="Byte"/>
+            <render-map-iterator keyType="Char" valueType="Char"/>
+            <render-map-iterator keyType="Char" valueType="Double"/>
+            <render-map-iterator keyType="Char" valueType="Float"/>
+            <render-map-iterator keyType="Char" valueType="Int"/>
+            <render-map-iterator keyType="Char" valueType="Long"/>
+            <render-map-iterator keyType="Double" valueType="Byte"/>
+            <render-map-iterator keyType="Double" valueType="Char"/>
+            <render-map-iterator keyType="Double" valueType="Double"/>
+            <render-map-iterator keyType="Double" valueType="Float"/>
+            <render-map-iterator keyType="Double" valueType="Int"/>
+            <render-map-iterator keyType="Double" valueType="Long"/>
+            <render-map-iterator keyType="Float" valueType="Byte"/>
+            <render-map-iterator keyType="Float" valueType="Char"/>
+            <render-map-iterator keyType="Float" valueType="Double"/>
+            <render-map-iterator keyType="Float" valueType="Float"/>
+            <render-map-iterator keyType="Float" valueType="Int"/>
+            <render-map-iterator keyType="Float" valueType="Long"/>
+            <render-map-iterator keyType="Int" valueType="Byte"/>
+            <render-map-iterator keyType="Int" valueType="Char"/>
+            <render-map-iterator keyType="Int" valueType="Double"/>
+            <render-map-iterator keyType="Int" valueType="Float"/>
+            <render-map-iterator keyType="Int" valueType="Int"/>
+            <render-map-iterator keyType="Int" valueType="Long"/>
+            <render-map-iterator keyType="Long" valueType="Byte"/>
+            <render-map-iterator keyType="Long" valueType="Char"/>
+            <render-map-iterator keyType="Long" valueType="Double"/>
+            <render-map-iterator keyType="Long" valueType="Float"/>
+            <render-map-iterator keyType="Long" valueType="Int"/>
+            <render-map-iterator keyType="Long" valueType="Long"/>
         </parallel>
     </target>
 
