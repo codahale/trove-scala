@@ -43,7 +43,6 @@
                 </filterchain>
             </copy>
         </sequential>
-
     </macrodef>
 
     <target name="render-iterators">
@@ -145,7 +144,65 @@
         </parallel>
     </target>
 
-    <target name="generate-sources" depends="render-iterators,render-sets,render-seqs" />
+    <macrodef name="render-map">
+        <attribute name="keyType"/>
+        <attribute name="valueType"/>
+        <sequential>
+            <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveMap.scala.tpl"
+                  tofile="src/main/scala/com/codahale/trove/mutable/@{keyType}@{valueType}Map.scala">
+                <filterchain>
+                    <replacetokens>
+                        <token key="keyType" value="@{keyType}"/>
+                        <token key="valueType" value="@{valueType}"/>
+                        <token key="header"
+                               value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <target name="render-maps">
+        <parallel>
+            <render-map keyType="Byte" valueType="Byte"/>
+            <render-map keyType="Byte" valueType="Char"/>
+            <render-map keyType="Byte" valueType="Double"/>
+            <render-map keyType="Byte" valueType="Float"/>
+            <render-map keyType="Byte" valueType="Int"/>
+            <render-map keyType="Byte" valueType="Long"/>
+            <render-map keyType="Char" valueType="Byte"/>
+            <render-map keyType="Char" valueType="Char"/>
+            <render-map keyType="Char" valueType="Double"/>
+            <render-map keyType="Char" valueType="Float"/>
+            <render-map keyType="Char" valueType="Int"/>
+            <render-map keyType="Char" valueType="Long"/>
+            <render-map keyType="Double" valueType="Byte"/>
+            <render-map keyType="Double" valueType="Char"/>
+            <render-map keyType="Double" valueType="Double"/>
+            <render-map keyType="Double" valueType="Float"/>
+            <render-map keyType="Double" valueType="Int"/>
+            <render-map keyType="Double" valueType="Long"/>
+            <render-map keyType="Float" valueType="Byte"/>
+            <render-map keyType="Float" valueType="Char"/>
+            <render-map keyType="Float" valueType="Double"/>
+            <render-map keyType="Float" valueType="Float"/>
+            <render-map keyType="Float" valueType="Int"/>
+            <render-map keyType="Float" valueType="Long"/>
+            <render-map keyType="Int" valueType="Byte"/>
+            <render-map keyType="Int" valueType="Char"/>
+            <render-map keyType="Int" valueType="Double"/>
+            <render-map keyType="Int" valueType="Float"/>
+            <render-map keyType="Int" valueType="Int"/>
+            <render-map keyType="Int" valueType="Long"/>
+            <render-map keyType="Long" valueType="Byte"/>
+            <render-map keyType="Long" valueType="Char"/>
+            <render-map keyType="Long" valueType="Double"/>
+            <render-map keyType="Long" valueType="Float"/>
+            <render-map keyType="Long" valueType="Int"/>
+        </parallel>
+    </target>
+
+    <target name="generate-sources" depends="render-iterators,render-sets,render-seqs,render-maps" />
 
     <target name="clean">
         <delete>
