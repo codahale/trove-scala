@@ -6,6 +6,7 @@ import com.codahale.trove.collection
 import com.codahale.trove.generic.DoubleSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableDoubleSet
 import scala.collection.mutable.{SetBuilder, Builder}
+import scala.collection.GenTraversableOnce
 import gnu.trove.set.hash.TDoubleHashSet
 
 class DoubleSet(private val underlying: TUnmodifiableDoubleSet)
@@ -15,7 +16,7 @@ class DoubleSet(private val underlying: TUnmodifiableDoubleSet)
           with Serializable {
   override def empty: DoubleSet = DoubleSet.empty
 
-  override def ++(xs: TraversableOnce[Double]) = {
+  override def ++(xs: GenTraversableOnce[Double]) = {
     val newSet = new TDoubleHashSet(underlying)
     xs match {
       case s: DoubleSet => newSet.addAll(s.underlying)
@@ -30,7 +31,7 @@ class DoubleSet(private val underlying: TUnmodifiableDoubleSet)
     new DoubleSet(new TUnmodifiableDoubleSet(newSet))
   }
 
-  override def --(xs: TraversableOnce[Double]) = {
+  override def --(xs: GenTraversableOnce[Double]) = {
     val newSet = new TDoubleHashSet(underlying)
     xs match {
       case s: DoubleSet => newSet.removeAll(s.underlying)

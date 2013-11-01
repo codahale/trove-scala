@@ -6,6 +6,7 @@ import com.codahale.trove.collection
 import com.codahale.trove.generic.CharSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableCharSet
 import scala.collection.mutable.{SetBuilder, Builder}
+import scala.collection.GenTraversableOnce
 import gnu.trove.set.hash.TCharHashSet
 
 class CharSet(private val underlying: TUnmodifiableCharSet)
@@ -15,7 +16,7 @@ class CharSet(private val underlying: TUnmodifiableCharSet)
           with Serializable {
   override def empty: CharSet = CharSet.empty
 
-  override def ++(xs: TraversableOnce[Char]) = {
+  override def ++(xs: GenTraversableOnce[Char]) = {
     val newSet = new TCharHashSet(underlying)
     xs match {
       case s: CharSet => newSet.addAll(s.underlying)
@@ -30,7 +31,7 @@ class CharSet(private val underlying: TUnmodifiableCharSet)
     new CharSet(new TUnmodifiableCharSet(newSet))
   }
 
-  override def --(xs: TraversableOnce[Char]) = {
+  override def --(xs: GenTraversableOnce[Char]) = {
     val newSet = new TCharHashSet(underlying)
     xs match {
       case s: CharSet => newSet.removeAll(s.underlying)

@@ -6,6 +6,7 @@ import com.codahale.trove.collection
 import com.codahale.trove.generic.FloatSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableFloatSet
 import scala.collection.mutable.{SetBuilder, Builder}
+import scala.collection.GenTraversableOnce
 import gnu.trove.set.hash.TFloatHashSet
 
 class FloatSet(private val underlying: TUnmodifiableFloatSet)
@@ -15,7 +16,7 @@ class FloatSet(private val underlying: TUnmodifiableFloatSet)
           with Serializable {
   override def empty: FloatSet = FloatSet.empty
 
-  override def ++(xs: TraversableOnce[Float]) = {
+  override def ++(xs: GenTraversableOnce[Float]) = {
     val newSet = new TFloatHashSet(underlying)
     xs match {
       case s: FloatSet => newSet.addAll(s.underlying)
@@ -30,7 +31,7 @@ class FloatSet(private val underlying: TUnmodifiableFloatSet)
     new FloatSet(new TUnmodifiableFloatSet(newSet))
   }
 
-  override def --(xs: TraversableOnce[Float]) = {
+  override def --(xs: GenTraversableOnce[Float]) = {
     val newSet = new TFloatHashSet(underlying)
     xs match {
       case s: FloatSet => newSet.removeAll(s.underlying)
