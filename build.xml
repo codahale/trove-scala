@@ -27,7 +27,7 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="render-map-iterator">
+    <macrodef name="render-primitive-map-iterator">
         <attribute name="keyType"/>
         <attribute name="valueType"/>
         <sequential>
@@ -45,6 +45,38 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="render-object-primitive-map-iterator">
+        <attribute name="valueType"/>
+        <sequential>
+            <copy file="src/main/resources/com/codahale/trove/collection/ObjectPrimitiveMapIterator.scala.tpl"
+                  tofile="src/main/scala/com/codahale/trove/collection/Object@{valueType}Iterator.scala">
+                <filterchain>
+                    <replacetokens>
+                        <token key="valueType" value="@{valueType}"/>
+                        <token key="header"
+                               value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="render-primitive-object-map-iterator">
+        <attribute name="keyType"/>
+        <sequential>
+            <copy file="src/main/resources/com/codahale/trove/collection/PrimitiveObjectMapIterator.scala.tpl"
+                  tofile="src/main/scala/com/codahale/trove/collection/@{keyType}ObjectIterator.scala">
+                <filterchain>
+                    <replacetokens>
+                        <token key="keyType" value="@{keyType}"/>
+                        <token key="header"
+                               value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+    </macrodef>
+
     <target name="render-iterators">
         <parallel>
             <render-iterator type="Byte"/>
@@ -53,42 +85,57 @@
             <render-iterator type="Float"/>
             <render-iterator type="Int"/>
             <render-iterator type="Long"/>
-            <render-map-iterator keyType="Byte" valueType="Byte"/>
-            <render-map-iterator keyType="Byte" valueType="Char"/>
-            <render-map-iterator keyType="Byte" valueType="Double"/>
-            <render-map-iterator keyType="Byte" valueType="Float"/>
-            <render-map-iterator keyType="Byte" valueType="Int"/>
-            <render-map-iterator keyType="Byte" valueType="Long"/>
-            <render-map-iterator keyType="Char" valueType="Byte"/>
-            <render-map-iterator keyType="Char" valueType="Char"/>
-            <render-map-iterator keyType="Char" valueType="Double"/>
-            <render-map-iterator keyType="Char" valueType="Float"/>
-            <render-map-iterator keyType="Char" valueType="Int"/>
-            <render-map-iterator keyType="Char" valueType="Long"/>
-            <render-map-iterator keyType="Double" valueType="Byte"/>
-            <render-map-iterator keyType="Double" valueType="Char"/>
-            <render-map-iterator keyType="Double" valueType="Double"/>
-            <render-map-iterator keyType="Double" valueType="Float"/>
-            <render-map-iterator keyType="Double" valueType="Int"/>
-            <render-map-iterator keyType="Double" valueType="Long"/>
-            <render-map-iterator keyType="Float" valueType="Byte"/>
-            <render-map-iterator keyType="Float" valueType="Char"/>
-            <render-map-iterator keyType="Float" valueType="Double"/>
-            <render-map-iterator keyType="Float" valueType="Float"/>
-            <render-map-iterator keyType="Float" valueType="Int"/>
-            <render-map-iterator keyType="Float" valueType="Long"/>
-            <render-map-iterator keyType="Int" valueType="Byte"/>
-            <render-map-iterator keyType="Int" valueType="Char"/>
-            <render-map-iterator keyType="Int" valueType="Double"/>
-            <render-map-iterator keyType="Int" valueType="Float"/>
-            <render-map-iterator keyType="Int" valueType="Int"/>
-            <render-map-iterator keyType="Int" valueType="Long"/>
-            <render-map-iterator keyType="Long" valueType="Byte"/>
-            <render-map-iterator keyType="Long" valueType="Char"/>
-            <render-map-iterator keyType="Long" valueType="Double"/>
-            <render-map-iterator keyType="Long" valueType="Float"/>
-            <render-map-iterator keyType="Long" valueType="Int"/>
-            <render-map-iterator keyType="Long" valueType="Long"/>
+
+            <render-primitive-map-iterator keyType="Byte" valueType="Byte"/>
+            <render-primitive-map-iterator keyType="Byte" valueType="Char"/>
+            <render-primitive-map-iterator keyType="Byte" valueType="Double"/>
+            <render-primitive-map-iterator keyType="Byte" valueType="Float"/>
+            <render-primitive-map-iterator keyType="Byte" valueType="Int"/>
+            <render-primitive-map-iterator keyType="Byte" valueType="Long"/>
+            <render-primitive-map-iterator keyType="Char" valueType="Byte"/>
+            <render-primitive-map-iterator keyType="Char" valueType="Char"/>
+            <render-primitive-map-iterator keyType="Char" valueType="Double"/>
+            <render-primitive-map-iterator keyType="Char" valueType="Float"/>
+            <render-primitive-map-iterator keyType="Char" valueType="Int"/>
+            <render-primitive-map-iterator keyType="Char" valueType="Long"/>
+            <render-primitive-map-iterator keyType="Double" valueType="Byte"/>
+            <render-primitive-map-iterator keyType="Double" valueType="Char"/>
+            <render-primitive-map-iterator keyType="Double" valueType="Double"/>
+            <render-primitive-map-iterator keyType="Double" valueType="Float"/>
+            <render-primitive-map-iterator keyType="Double" valueType="Int"/>
+            <render-primitive-map-iterator keyType="Double" valueType="Long"/>
+            <render-primitive-map-iterator keyType="Float" valueType="Byte"/>
+            <render-primitive-map-iterator keyType="Float" valueType="Char"/>
+            <render-primitive-map-iterator keyType="Float" valueType="Double"/>
+            <render-primitive-map-iterator keyType="Float" valueType="Float"/>
+            <render-primitive-map-iterator keyType="Float" valueType="Int"/>
+            <render-primitive-map-iterator keyType="Float" valueType="Long"/>
+            <render-primitive-map-iterator keyType="Int" valueType="Byte"/>
+            <render-primitive-map-iterator keyType="Int" valueType="Char"/>
+            <render-primitive-map-iterator keyType="Int" valueType="Double"/>
+            <render-primitive-map-iterator keyType="Int" valueType="Float"/>
+            <render-primitive-map-iterator keyType="Int" valueType="Int"/>
+            <render-primitive-map-iterator keyType="Int" valueType="Long"/>
+            <render-primitive-map-iterator keyType="Long" valueType="Byte"/>
+            <render-primitive-map-iterator keyType="Long" valueType="Char"/>
+            <render-primitive-map-iterator keyType="Long" valueType="Double"/>
+            <render-primitive-map-iterator keyType="Long" valueType="Float"/>
+            <render-primitive-map-iterator keyType="Long" valueType="Int"/>
+            <render-primitive-map-iterator keyType="Long" valueType="Long"/>
+
+            <render-object-primitive-map-iterator valueType="Byte"/>
+            <render-object-primitive-map-iterator valueType="Char"/>
+            <render-object-primitive-map-iterator valueType="Double"/>
+            <render-object-primitive-map-iterator valueType="Float"/>
+            <render-object-primitive-map-iterator valueType="Int"/>
+            <render-object-primitive-map-iterator valueType="Long"/>
+
+            <render-primitive-object-map-iterator keyType="Byte"/>
+            <render-primitive-object-map-iterator keyType="Char"/>
+            <render-primitive-object-map-iterator keyType="Double"/>
+            <render-primitive-object-map-iterator keyType="Float"/>
+            <render-primitive-object-map-iterator keyType="Int"/>
+            <render-primitive-object-map-iterator keyType="Long"/>
         </parallel>
     </target>
 
@@ -144,7 +191,7 @@
         </parallel>
     </target>
 
-    <macrodef name="render-map">
+    <macrodef name="render-primitive-map">
         <attribute name="keyType"/>
         <attribute name="valueType"/>
         <sequential>
@@ -162,43 +209,89 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="render-object-primitive-map">
+        <attribute name="valueType"/>
+        <sequential>
+            <copy file="src/main/resources/com/codahale/trove/mutable/ObjectPrimitiveMap.scala.tpl"
+                  tofile="src/main/scala/com/codahale/trove/mutable/Object@{valueType}Map.scala">
+                <filterchain>
+                    <replacetokens>
+                        <token key="valueType" value="@{valueType}"/>
+                        <token key="header"
+                               value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="render-primitive-object-map">
+        <attribute name="keyType"/>
+        <sequential>
+            <copy file="src/main/resources/com/codahale/trove/mutable/PrimitiveObjectMap.scala.tpl"
+                  tofile="src/main/scala/com/codahale/trove/mutable/@{keyType}ObjectMap.scala">
+                <filterchain>
+                    <replacetokens>
+                        <token key="keyType" value="@{keyType}"/>
+                        <token key="header"
+                               value="// AUTOMATICALLY GENERATED FILE!!! DO NOT EDIT!!!"/>
+                    </replacetokens>
+                </filterchain>
+            </copy>
+        </sequential>
+    </macrodef>
+
     <target name="render-maps">
         <parallel>
-            <render-map keyType="Byte" valueType="Byte"/>
-            <render-map keyType="Byte" valueType="Char"/>
-            <render-map keyType="Byte" valueType="Double"/>
-            <render-map keyType="Byte" valueType="Float"/>
-            <render-map keyType="Byte" valueType="Int"/>
-            <render-map keyType="Byte" valueType="Long"/>
-            <render-map keyType="Char" valueType="Byte"/>
-            <render-map keyType="Char" valueType="Char"/>
-            <render-map keyType="Char" valueType="Double"/>
-            <render-map keyType="Char" valueType="Float"/>
-            <render-map keyType="Char" valueType="Int"/>
-            <render-map keyType="Char" valueType="Long"/>
-            <render-map keyType="Double" valueType="Byte"/>
-            <render-map keyType="Double" valueType="Char"/>
-            <render-map keyType="Double" valueType="Double"/>
-            <render-map keyType="Double" valueType="Float"/>
-            <render-map keyType="Double" valueType="Int"/>
-            <render-map keyType="Double" valueType="Long"/>
-            <render-map keyType="Float" valueType="Byte"/>
-            <render-map keyType="Float" valueType="Char"/>
-            <render-map keyType="Float" valueType="Double"/>
-            <render-map keyType="Float" valueType="Float"/>
-            <render-map keyType="Float" valueType="Int"/>
-            <render-map keyType="Float" valueType="Long"/>
-            <render-map keyType="Int" valueType="Byte"/>
-            <render-map keyType="Int" valueType="Char"/>
-            <render-map keyType="Int" valueType="Double"/>
-            <render-map keyType="Int" valueType="Float"/>
-            <render-map keyType="Int" valueType="Int"/>
-            <render-map keyType="Int" valueType="Long"/>
-            <render-map keyType="Long" valueType="Byte"/>
-            <render-map keyType="Long" valueType="Char"/>
-            <render-map keyType="Long" valueType="Double"/>
-            <render-map keyType="Long" valueType="Float"/>
-            <render-map keyType="Long" valueType="Int"/>
+            <render-primitive-map keyType="Byte" valueType="Byte"/>
+            <render-primitive-map keyType="Byte" valueType="Char"/>
+            <render-primitive-map keyType="Byte" valueType="Double"/>
+            <render-primitive-map keyType="Byte" valueType="Float"/>
+            <render-primitive-map keyType="Byte" valueType="Int"/>
+            <render-primitive-map keyType="Byte" valueType="Long"/>
+            <render-primitive-map keyType="Char" valueType="Byte"/>
+            <render-primitive-map keyType="Char" valueType="Char"/>
+            <render-primitive-map keyType="Char" valueType="Double"/>
+            <render-primitive-map keyType="Char" valueType="Float"/>
+            <render-primitive-map keyType="Char" valueType="Int"/>
+            <render-primitive-map keyType="Char" valueType="Long"/>
+            <render-primitive-map keyType="Double" valueType="Byte"/>
+            <render-primitive-map keyType="Double" valueType="Char"/>
+            <render-primitive-map keyType="Double" valueType="Double"/>
+            <render-primitive-map keyType="Double" valueType="Float"/>
+            <render-primitive-map keyType="Double" valueType="Int"/>
+            <render-primitive-map keyType="Double" valueType="Long"/>
+            <render-primitive-map keyType="Float" valueType="Byte"/>
+            <render-primitive-map keyType="Float" valueType="Char"/>
+            <render-primitive-map keyType="Float" valueType="Double"/>
+            <render-primitive-map keyType="Float" valueType="Float"/>
+            <render-primitive-map keyType="Float" valueType="Int"/>
+            <render-primitive-map keyType="Float" valueType="Long"/>
+            <render-primitive-map keyType="Int" valueType="Byte"/>
+            <render-primitive-map keyType="Int" valueType="Char"/>
+            <render-primitive-map keyType="Int" valueType="Double"/>
+            <render-primitive-map keyType="Int" valueType="Float"/>
+            <render-primitive-map keyType="Int" valueType="Int"/>
+            <render-primitive-map keyType="Int" valueType="Long"/>
+            <render-primitive-map keyType="Long" valueType="Byte"/>
+            <render-primitive-map keyType="Long" valueType="Char"/>
+            <render-primitive-map keyType="Long" valueType="Double"/>
+            <render-primitive-map keyType="Long" valueType="Float"/>
+            <render-primitive-map keyType="Long" valueType="Int"/>
+
+            <render-object-primitive-map valueType="Byte"/>
+            <render-object-primitive-map valueType="Char"/>
+            <render-object-primitive-map valueType="Double"/>
+            <render-object-primitive-map valueType="Float"/>
+            <render-object-primitive-map valueType="Int"/>
+            <render-object-primitive-map valueType="Long"/>
+
+            <render-primitive-object-map keyType="Byte"/>
+            <render-primitive-object-map keyType="Char"/>
+            <render-primitive-object-map keyType="Double"/>
+            <render-primitive-object-map keyType="Float"/>
+            <render-primitive-object-map keyType="Int"/>
+            <render-primitive-object-map keyType="Long"/>
         </parallel>
     </target>
 
