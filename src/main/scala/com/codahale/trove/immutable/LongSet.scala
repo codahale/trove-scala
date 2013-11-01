@@ -6,6 +6,7 @@ import com.codahale.trove.collection
 import com.codahale.trove.generic.LongSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableLongSet
 import scala.collection.mutable.{SetBuilder, Builder}
+import scala.collection.GenTraversableOnce
 import gnu.trove.set.hash.TLongHashSet
 
 class LongSet(private val underlying: TUnmodifiableLongSet)
@@ -15,7 +16,7 @@ class LongSet(private val underlying: TUnmodifiableLongSet)
           with Serializable {
   override def empty: LongSet = LongSet.empty
 
-  override def ++(xs: TraversableOnce[Long]) = {
+  override def ++(xs: GenTraversableOnce[Long]) = {
     val newSet = new TLongHashSet(underlying)
     xs match {
       case s: LongSet => newSet.addAll(s.underlying)
@@ -30,7 +31,7 @@ class LongSet(private val underlying: TUnmodifiableLongSet)
     new LongSet(new TUnmodifiableLongSet(newSet))
   }
 
-  override def --(xs: TraversableOnce[Long]) = {
+  override def --(xs: GenTraversableOnce[Long]) = {
     val newSet = new TLongHashSet(underlying)
     xs match {
       case s: LongSet => newSet.removeAll(s.underlying)

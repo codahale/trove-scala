@@ -6,6 +6,7 @@ import com.codahale.trove.collection
 import com.codahale.trove.generic.ByteSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableByteSet
 import scala.collection.mutable.{SetBuilder, Builder}
+import scala.collection.GenTraversableOnce
 import gnu.trove.set.hash.TByteHashSet
 
 class ByteSet(private val underlying: TUnmodifiableByteSet)
@@ -15,7 +16,7 @@ class ByteSet(private val underlying: TUnmodifiableByteSet)
           with Serializable {
   override def empty: ByteSet = ByteSet.empty
 
-  override def ++(xs: TraversableOnce[Byte]) = {
+  override def ++(xs: GenTraversableOnce[Byte]) = {
     val newSet = new TByteHashSet(underlying)
     xs match {
       case s: ByteSet => newSet.addAll(s.underlying)
@@ -30,7 +31,7 @@ class ByteSet(private val underlying: TUnmodifiableByteSet)
     new ByteSet(new TUnmodifiableByteSet(newSet))
   }
 
-  override def --(xs: TraversableOnce[Byte]) = {
+  override def --(xs: GenTraversableOnce[Byte]) = {
     val newSet = new TByteHashSet(underlying)
     xs match {
       case s: ByteSet => newSet.removeAll(s.underlying)

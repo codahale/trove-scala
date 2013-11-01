@@ -6,6 +6,7 @@ import com.codahale.trove.collection
 import com.codahale.trove.generic.IntSetFactory
 import gnu.trove.impl.unmodifiable.TUnmodifiableIntSet
 import scala.collection.mutable.{SetBuilder, Builder}
+import scala.collection.GenTraversableOnce
 import gnu.trove.set.hash.TIntHashSet
 
 class IntSet(private val underlying: TUnmodifiableIntSet)
@@ -15,7 +16,7 @@ class IntSet(private val underlying: TUnmodifiableIntSet)
           with Serializable {
   override def empty: IntSet = IntSet.empty
 
-  override def ++(xs: TraversableOnce[Int]) = {
+  override def ++(xs: GenTraversableOnce[Int]) = {
     val newSet = new TIntHashSet(underlying)
     xs match {
       case s: IntSet => newSet.addAll(s.underlying)
@@ -30,7 +31,7 @@ class IntSet(private val underlying: TUnmodifiableIntSet)
     new IntSet(new TUnmodifiableIntSet(newSet))
   }
 
-  override def --(xs: TraversableOnce[Int]) = {
+  override def --(xs: GenTraversableOnce[Int]) = {
     val newSet = new TIntHashSet(underlying)
     xs match {
       case s: IntSet => newSet.removeAll(s.underlying)
